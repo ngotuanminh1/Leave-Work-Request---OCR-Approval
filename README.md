@@ -14,3 +14,8 @@
 
 
 <hr>
+
+<h2 align="center">✨ Mô tả dự án</h2>
+<p align="justify">
+  Dự án này là một giải pháp E-Workflow <strong>(Luồng công việc điện tử)</strong> tiên tiến <strong>nhằm số hóa và tự động hóa</strong> hoàn toàn quy trình xử lý đơn hành chính <strong>(Đơn xin nghỉ, công tác, thôi việc, thanh toán)</strong>. trong môi trường doanh nghiệp.  <strong>Giải quyết thách thức lớn nhất là xử lý văn bản tiếng việt</strong>, không chuẩn từ ảnh(lỗi dấu, dính chữ) bằng phương pháp lai ghép (Hybrid) giữa OCR truyền thống<strong> và Trí tuệ nhân tạo</strong> tạo sinh (LLM).
+</p>
