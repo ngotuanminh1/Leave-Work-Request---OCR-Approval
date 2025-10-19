@@ -84,6 +84,8 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
 
 <div align="center>
 
+
+
 [![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](#)
 [![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](#)
 [![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-for-the-badge&logo=sqlite&logoColor=white)](#)
@@ -97,3 +99,49 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
 [![VS Code](https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#)
 
 </div>
+
+
+### 🚀 Hướng Dẫn Cài Đặt và Chạy
+
+<h2 align="center">📦 Chạy và cài đặt</h2>
+<p align="justify">
+  <strong>Chuẩn bị môi trường</strong><br>
+
+  <strong>1. Tạo môi trường ảo (Virtual Environment): </strong><br>
+ 
+  <code>python -m venv venv
+    # Kích hoạt môi trường ảo:
+    # Trên Windows: .\venv\Scripts\activate
+    # Trên macOS/Linux: source venv/bin/activate</code><br><br>
+  
+  <strong>2. Lệnh cài thư viện:</strong><br>
+  - (Tùy chọn) Tạo môi trường ảo (nên dùng <code>pip install -r requirements.txt</code>):<br>
+  <p><code># Nếu chưa có requirements.txt, bạn có thể tạo thủ công bằng cách liệt kê các gói sau:</code></p>
+  <code># Flask
+        # python-dotenv
+        # Flask-Mail
+        # Werkzeug
+        # opencv-python
+        # pytesseract
+        # unidecode
+        # google-generativeai</code><br><br>
+
+  <strong>4. Cài đặt Tesseract OCR Engine: </strong><br>
+  <p><br>Windows: </br> tải xuống trình cài đặt từ Tesseract-OCR GitHub. Đảm bảo thêm đường dẫn<code>tesseract.exe </code>vào biến môi trường<code> PATH.</code></p>
+  <p><br>Cài đặt ngôn ngữ tiếng Việt:</br>
+  Tìm file ngôn ngữ <code>vie.traineddate</code>(có thể tải từ GitHub của Tesseract hoặc cài đặt qua gói ngôn ngữ Tesseract).<p>
+  <code>npm install express firebase-admin uuid</code><br><br>
+
+  - <strong>Chạy server:</strong><br>
+  <code>node server.js</code>
+  <p><em>Lưu ý: Đảm bảo đã cấu hình đúng file <code>serviceAccountKey.json</code> trước khi chạy server.</em></p>
+</p>
+
+<hr>
+
+<h2 align="center">🧮 Bảng mạch</h2>
+<p align="center">
+  ⛓️‍💥 <strong>Hướng dẫn cắm dây:</strong>
+</p>
+
+<hr>
