@@ -127,8 +127,8 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
         # google-generativeai</code><br><br>
 
   <strong>4. Cài đặt Tesseract OCR Engine: </strong><br>
-  <p><br>Windows: </br> tải xuống trình cài đặt từ Tesseract-OCR GitHub. Đảm bảo thêm đường dẫn<code>tesseract.exe </code>vào biến môi trường<code> PATH.</code></p>
-  <p><br>Cài đặt ngôn ngữ tiếng Việt:</br>
+  <p><br>Windows: </br> - tải xuống trình cài đặt từ Tesseract-OCR GitHub. Đảm bảo thêm đường dẫn<code>tesseract.exe </code>vào biến môi trường<code> PATH.</code></p>
+  <p><br>- Cài đặt ngôn ngữ tiếng Việt:</br>
   Tìm file ngôn ngữ <code>vie.traineddate</code>(có thể tải từ GitHub của Tesseract hoặc cài đặt qua gói ngôn ngữ Tesseract).<p>
   <code>npm install express firebase-admin uuid</code><br><br>
 
