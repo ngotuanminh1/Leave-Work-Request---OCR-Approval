@@ -127,15 +127,34 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
         # google-generativeai</code><br><br>
 
   <strong>4. Cài đặt Tesseract OCR Engine: </strong><br>
-  <p><br>Windows: </br> - tải xuống trình cài đặt từ Tesseract-OCR GitHub. Đảm bảo thêm đường dẫn<code>tesseract.exe </code>vào biến môi trường<code> PATH.</code></p>
-  <p><br>- Cài đặt ngôn ngữ tiếng Việt:</br>
-  Tìm file ngôn ngữ <code>vie.traineddate</code>(có thể tải từ GitHub của Tesseract hoặc cài đặt qua gói ngôn ngữ Tesseract).<p>
-  <code>npm install express firebase-admin uuid</code><br><br>
+  <p><br>Windows: </br><strong> - tải xuống trình cài đặt từ Tesseract-OCR GitHub. Đảm bảo thêm đường dẫn<code>tesseract.exe </code>vào biến môi trường<code> PATH.</code></p></strong>
+  <p><br>Cài đặt ngôn ngữ tiếng Việt:</br>
+  <strong><br>-Tìm file ngôn ngữ <code>vie.traineddate</code>(có thể tải từ GitHub của Tesseract hoặc cài đặt qua gói ngôn ngữ Tesseract).<p><br></strong>
+  <strong><p>- Sao chép<code>vie.traineddata</code> vào thư mục <code>tessdata</code> của Tesseract (thường là) <code>C:\Program Files\Tesseract-OCR\tessdata</code></p><br><br></strong>
 
-  - <strong>Chạy server:</strong><br>
+  - <strong>4. Cấu hình Biến Môi trường (.env)</strong><br>
+  <code>APP_SECRET_KEY="một_chuỗi_bí_mật_mạnh       _cho_flask_session"
+        GEMINI_API_KEY="YOUR_GOOGLE_GEMINI_API_KEY" # Lấy từ Google AI Studio
+        # Hoặc nếu dùng OpenAI (chỉ để fallback trong code, nên dùng Gemini nếu đã cấu hình):
+        # OPENAI_API_KEY="YOUR_OPENAI_API_KEY" 
+
+        # Cấu hình email (Gmail SMTP)
+        MAIL_SERVER='smtp.gmail.com'
+        MAIL_PORT=587
+        MAIL_USE_TLS=True
+        MAIL_USERNAME='email_cua_ban@gmail.com' # Email dùng để gửi thông báo
+        MAIL_PASSWORD='your_app_password' # Tạo "App password" cho tài khoản Gmail của bạn
+        MAIL_DEFAULT_SENDER='email_cua_ban@gmail.com'
+
+        PORT=5000 # Cổng chạy ứng dụng (mặc định 5000)</code>
+  <p><em>Lưu ý về <code>MAIL_PASSWORD</code> Bạn không nên sử dụng mật khẩu Gmail thông thường. Thay vào đó, hãy tạo một "App password" cho tài khoản Gmail của mình. Hướng dẫn: Tạo và sử dụng Mật khẩu ứng dụng.</em></p>
+</p>
+
+ - <strong>Chạy server:</strong><br>
   <code>node server.js</code>
   <p><em>Lưu ý: Đảm bảo đã cấu hình đúng file <code>serviceAccountKey.json</code> trước khi chạy server.</em></p>
 </p>
+
 
 <hr>
 
