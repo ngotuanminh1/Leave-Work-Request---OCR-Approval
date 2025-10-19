@@ -132,7 +132,7 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
   <strong><br>-Tìm file ngôn ngữ <code>vie.traineddate</code>(có thể tải từ GitHub của Tesseract hoặc cài đặt qua gói ngôn ngữ Tesseract).<p><br></strong>
   <strong><p>- Sao chép<code>vie.traineddata</code> vào thư mục <code>tessdata</code> của Tesseract (thường là) <code>C:\Program Files\Tesseract-OCR\tessdata</code></p><br><br></strong>
 
-  - <strong>4. Cấu hình Biến Môi trường (.env)</strong><br>
+  5. Cấu hình Biến Môi trường<br>
   <code>APP_SECRET_KEY="một_chuỗi_bí_mật_mạnh       _cho_flask_session"
         GEMINI_API_KEY="YOUR_GOOGLE_GEMINI_API_KEY" # Lấy từ Google AI Studio
         # Hoặc nếu dùng OpenAI (chỉ để fallback trong code, nên dùng Gemini nếu đã cấu hình):
