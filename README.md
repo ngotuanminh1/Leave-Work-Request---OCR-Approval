@@ -174,6 +174,8 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
   <tbody>
     <tr>
       <td>ThS. Lê Trung Hiếu</td>
+    </tr>
+    <tr>
       <td>KS. Nguyễn Thái Khánh</td>
     </tr>
   </tbody>
