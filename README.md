@@ -148,17 +148,13 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
   <p><em>Lưu ý về <code>MAIL_PASSWORD</code> Bạn không nên sử dụng mật khẩu Gmail thông thường. Thay vào đó, hãy tạo một "App password" cho tài khoản Gmail của mình. Hướng dẫn: Tạo và sử dụng Mật khẩu ứng dụng.</em></p>
 </p>
 
- - <strong>Chạy server:</strong><br>
-  <code>node server.js</code>
-  <p><em>Lưu ý: Đảm bảo đã cấu hình đúng file <code>serviceAccountKey.json</code> trước khi chạy server.</em></p>
+ <strong>6. Khởi tạo Cơ sở dữ liệu & Chạy server<strong><br>
+  <code>python app.py</code>
+  <p>Ứng dụng sẽ chạy tại <code>http://127.0.0.1:5000</code> (hoặc cổng đã cấu hình trong .env).</em></p>
 </p>
 
+### 🔑 Đăng nhập
 
-<hr>
+- <strong><p>Khi khởi tạo DB lần đầu, bạn có thể cần tạo tài khoản admin thủ công trong <code>database.db</code> để bắt đầu. Hoặc sửa <code>schema.sql</code> để có một user mặc định.</p><strong>
 
-<h2 align="center">🧮 Bảng mạch</h2>
-<p align="center">
-  ⛓️‍💥 <strong>Hướng dẫn cắm dây:</strong>
-</p>
-
-<hr>
+- <strong><p>Ví dụ tạo user admin trong <code>schema.sql</code> (chỉ dành cho phát triển) <code>schema.sql</code></p><strong>
