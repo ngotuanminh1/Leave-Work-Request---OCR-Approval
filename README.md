@@ -2,12 +2,14 @@
 🚗 Xử lý Đơn xin Nghỉ phép và Đề nghị Công tác – OCR trích dữ liệu, gửi duyệt qua hệ thống.
 </h1>
 <div align="center">
-    <img src="README/logoDaiNam.png" alt="DaiNam University Logo" width="250"> 
+  <img src="README/logoDaiNam.png" alt="DaiNam University Logo" width="250">
 </div>
 <br>
 <div align="center">
-    [![FIT DNU](https://img.shields.io/badge/-FIT%20DNU-28a745?style=for-the-badge)](https://fitdnu.net/)
-    [![DAINAM UNIVERSITY](https://img.shields.io/badge/-DAINAM%20UNIVERSITY-dc3545?style=for-the-badge)](https://dainam.edu.vn/vi)
+
+[![FIT DNU](https://img.shields.io/badge/-FIT%20DNU-28a745?style=for-the-badge)](https://fitdnu.net/)
+[![DAINAM UNIVERSITY](https://img.shields.io/badge/-DAINAM%20UNIVERSITY-dc3545?style=for-the-badge)](https://dainam.edu.vn/vi)
+
 </div>
 
 <hr>
@@ -41,9 +43,13 @@ Chúng tôi giải quyết thách thức lớn nhất là xử lý **văn bản 
 
 <hr>
 
-<h2 align="center">💻 Công nghệ sử dụng</h2>
-<div align="center">
-    [![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](#)
+### 💻 Công nghệ sử dụng
+
+<div align="center>
+
+
+
+[![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](#)
 [![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](#)
 [![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-for-the-badge&logo=sqlite&logoColor=white)](#)
 [![OpenCV](https://img.shields.io/badge/OpenCV-27338E?style=for-the-badge&logo=opencv&logoColor=white)](#)
