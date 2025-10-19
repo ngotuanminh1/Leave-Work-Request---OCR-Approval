@@ -197,6 +197,11 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
       <td>1571020175</td>
       <td>Phát triển dự án</td>
     </tr>
+    <tr>
+      <td>Nguyễn Trung Kiên</td>
+      <td>xxxxxxxx</td>
+      <td>Phát triển dự án</td>
+    </tr>
   </tbody>
 </table>
 </center>
