@@ -158,3 +158,50 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
 - <strong><p>Khi khởi tạo DB lần đầu, bạn có thể cần tạo tài khoản admin thủ công trong <code>database.db</code> để bắt đầu. Hoặc sửa <code>schema.sql</code> để có một user mặc định.</p><strong>
 
 - <strong><p>Ví dụ tạo user admin trong <code>schema.sql</code> (chỉ dành cho phát triển) <code>schema.sql</code></p><strong>
+
+
+<hr>
+
+<h2 align="center">🤝</h2>
+<p>Dự án được phát triển bởi:</p>
+<center>
+<table>
+  <thead>
+    <tr>
+      <th>Giảng viên hướng dẫn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ThS. Lê Trung Hiếu</td>
+      <td>KS. Nguyễn Thái Khánh</td>
+    </tr>
+  </tbody>
+</table>
+</center>
+
+<center>
+<table>
+  <thead>
+    <tr>
+      <th>Họ và Tên</th>
+      <th>Mã sinh viên</th>
+      <th>Vai trò</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ngô Tuấn Minh</td>
+      <td>1571020175</td>
+      <td>Phát triển dự án</td>
+    </tr>
+  </tbody>
+</table>
+</center>
+
+
+
+
+
+
+<p align="center">© 2025 NGÔ TUẤN MINH, CNTT16-06, TRƯỜNG ĐẠI HỌC ĐẠI NAM</p>
