@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head><meta charset="UTF-8"><title>Xác nhận đơn</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/confirm.css') }}">
+</head>
+<body>
+  <h1>Xác nhận trước khi gửi</h1>
+  <form method="post" action="{{ url_for('save') }}">
+    Họ tên: <input type="text" name="ho_ten" value="{{ data.ho_ten or '' }}" /><br/>
+    Mã NV: <input type="text" name="ma_nv" value="{{ data.ma_nv or '' }}" /><br/>
+    Phòng ban: <input type="text" name="phong_ban" value="{{ data.phong_ban or '' }}" /><br/>
+    Loại đơn: <input type="text" name="loai_don" value="{{ data.loai_don or '' }}" /><br/>
+    Ngày bắt đầu: <input type="text" name="ngay_bat_dau" value="{{ data.ngay_bat_dau or '' }}" /><br/>
+    Ngày kết thúc: <input type="text" name="ngay_ket_thuc" value="{{ data.ngay_ket_thuc or '' }}" /><br/>
+    Lý do:<textarea name="ly_do">{{ data.ly_do or '' }}</textarea><br/>
+    Trạng thái tiếp theo: <input type="text" name="next_step" value="{{ next_step }}" readonly /><br/>
+    <input type="hidden" name="filepath" value="{{ filepath or '' }}" />
+    <input type="hidden" name="ket_qua_ocr" value="{{ ket_qua_ocr or '' }}" />
+    <button type="submit">Lưu đơn</button>
+  </form>
+
+  {% if filepath %}
+  <h3>Ảnh đơn:</h3>
+  <img src="{{ url_for('uploaded_file', filename=filepath) }}" style="max-width:400px;" />
+  {% endif %}
+
+  <h3>Kết quả OCR (gốc):</h3>
+  <pre>{{ ket_qua_ocr }}</pre>
+</body>
+</html>

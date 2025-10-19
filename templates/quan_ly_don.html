@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Đơn từ Tổng thể</title>
+    <!-- Sử dụng lại CSS của Dashboard Admin -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dbadmin.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Tối ưu hóa cho trang Quản lý đơn */
+        .container {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .badge-warning { background-color: #ffc107; color: #333; }
+        .badge-success { background-color: #28a745; color: white; }
+        .badge-danger { background-color: #dc3545; color: white; }
+        .badge-secondary { background-color: #6c757d; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Quản lý Đơn từ Tổng thể</h1>
+
+        <!-- Form Tìm kiếm và Lọc Phòng ban -->
+        <form method="GET" class="mt-4">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Tìm kiếm tên, mã NV..." 
+                               value="{{ search_query or '' }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <select name="phong_ban_filter" class="form-control">
+                        <option value="">— Lọc theo Phòng ban —</option>
+                        {% for p in phong_bans %}
+                            <option value="{{ p }}" 
+                                    {% if p == request.args.get('phong_ban_filter') %}selected{% endif %}>
+                                {{ p }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <select name="trang_thai_filter" class="form-control" onchange="this.form.submit()">
+                        <option value="">— Lọc theo Trạng thái —</option>
+                        
+                        {% set current_status = request.args.get('trang_thai_filter') %}
+                        
+                        <option value="chờ duyệt" {% if current_status == 'chờ duyệt' %}selected{% endif %}>Chờ duyệt</option>
+                        <option value="đã duyệt" {% if current_status == 'đã duyệt' %}selected{% endif %}>Đã duyệt</option>
+                        <option value="từ chối" {% if current_status == 'từ chối' %}selected{% endif %}>Từ chối</option>
+                        <option value="hoàn tất" {% if current_status == 'hoàn tất' %}selected{% endif %}>Hoàn tất</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <!-- Bảng đơn -->
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Người nộp</th>
+                    <th>Mã NV</th>
+                    <th>Phòng ban</th>
+                    <th>Loại đơn</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày nộp</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in dons %}
+                <tr>
+                    <td>{{ d.id }}</td>
+                    <td>{{ d.ho_ten }}</td>
+                    <td>{{ d.ma_nv or 'N/A' }}</td>
+                    <td>{{ d.phong_ban }}</td>
+                    <td>{{ d.loai_don }}</td>
+                    <td>
+                        <!-- Thêm màu sắc cho trạng thái -->
+                        {% set status = d.trang_thai|lower %}
+                        {% if 'chờ duyệt' in status %}
+                            <span class="badge badge-warning">Chờ duyệt</span>
+                        {% elif 'đã duyệt' in status or 'hoàn tất' in status %}
+                            <span class="badge badge-success">Đã duyệt</span>
+                        {% elif 'từ chối' in status %}
+                            <span class="badge badge-danger">Từ chối</span>
+                        {% else %}
+                            <span class="badge badge-secondary">{{ d.trang_thai }}</span>
+                        {% endif %}
+                    </td>
+                    <!-- Định dạng lại ngày tháng (chỉ lấy ngày) -->
+                    <td>{{ d.ngay_gui.split(' ')[0] if d.ngay_gui else 'N/A' }}</td> 
+                    <td><a href="{{ url_for('don_detail', don_id=d.id) }}" class="btn btn-info btn-sm">Xem</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" class="text-center text-muted">Không có đơn nào phù hợp với tìm kiếm.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <br>
+        <a href="{{ url_for('dashboard_duyet') }}" class="btn btn-secondary">← Trở về Dashboard</a>
+    </div>
+</body>
+</html>

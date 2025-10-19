@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Nhân viên</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f4f7f9; color: #333; }
+        .container { max-width: 600px; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        h2 { color: #1a73e8; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; margin-bottom: 25px; font-weight: 600; }
+        .btn-success { background-color: #34a853; border-color: #34a853; transition: all 0.2s; }
+        .btn-success:hover { background-color: #2b8e44; border-color: #2b8e44; }
+        .btn-secondary { transition: all 0.2s; }
+        /* Style cho trường bị lỗi (nếu có) */
+        .alert-error { border-left: 5px solid #dc3545; } 
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Thêm nhân viên mới</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" class="mt-4">
+            
+            <div class="form-group">
+                <label for="ho_ten">Họ tên (*)</label>
+                <input type="text" name="ho_ten" id="ho_ten" class="form-control" 
+                       value="{{ data.ho_ten or '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Tên đăng nhập (*)</label>
+                <input type="text" name="username" id="username" class="form-control" 
+                       value="{{ data.username or '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" 
+                       value="{{ data.email or '' }}">
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu (*)</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="phong_ban">Phòng ban (*)</label>
+                <input type="text" name="phong_ban" id="phong_ban" class="form-control" 
+                       value="{{ data.phong_ban or '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="chuc_vu">Chức vụ</label>
+                <input type="text" name="chuc_vu" id="chuc_vu" class="form-control" 
+                       value="{{ data.chuc_vu or '' }}">
+            </div>
+            <div class="form-group">
+                <label for="role">Vai trò (*)</label>
+                <select name="role" id="role" class="form-control" required>
+                    {% set current_role = data.role or 'nhan_vien' %}
+                    <option value="nhan_vien" {% if current_role == 'nhan_vien' %}selected{% endif %}>Nhân viên</option>
+                    <option value="quan_ly" {% if current_role == 'quan_ly' %}selected{% endif %}>Quản lý</option>
+                    <option value="nhan_su" {% if current_role == 'nhan_su' %}selected{% endif %}>Nhân sự</option>
+                    <option value="ke_toan" {% if current_role == 'ke_toan' %}selected{% endif %}>Kế toán</option>
+                    <option value="giam_doc" {% if current_role == 'giam_doc' %}selected{% endif %}>Giám đốc</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Lưu</button>
+            <a href="{{ url_for('quan_ly_nhan_vien') }}" class="btn btn-secondary">Quay lại</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

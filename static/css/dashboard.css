@@ -1,0 +1,111 @@
+/* Thiết lập font và nền chung */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc; /* Nền trắng xám nhạt */
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa nội dung theo chiều ngang */
+}
+
+/* Tiêu đề chính */
+h1 {
+    color: #007bff; /* Màu xanh dương chuyên nghiệp */
+    margin-bottom: 25px;
+    font-weight: 700;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Khu vực liên kết (Nộp đơn mới | Đăng xuất) */
+body > a {
+    text-decoration: none;
+    color: #6c757d;
+    font-weight: 500;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+body > a:hover {
+    color: #0056b3;
+    background-color: #e9ecef;
+}
+
+/* Bảng đơn */
+table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse; /* Gộp các đường viền lại */
+    margin-top: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Đổ bóng nhẹ */
+    border-radius: 8px;
+    overflow: hidden; /* Cần thiết để áp dụng border-radius cho các góc */
+}
+
+/* Tiêu đề bảng */
+th {
+    background-color: #2c3e50; /* Màu nền tối Sidebar */
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 15px 20px;
+}
+
+/* Các dòng dữ liệu */
+td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #dee2e6; /* Chỉ dùng viền dưới */
+    text-align: left;
+}
+
+/* Dòng xen kẽ */
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Hiệu ứng di chuột (Hover) */
+tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Cột Chi tiết */
+td a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 4px 8px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+}
+
+td a:hover {
+    color: white;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Định dạng cột Trạng thái (Optional: Thêm màu sắc) */
+td:nth-child(3) {
+    font-weight: 600;
+    /* Bạn có thể dùng Jinja2 để thêm class màu sắc tại đây */
+}
+
+/* Tinh chỉnh chiều rộng cột */
+table tr th:nth-child(1), table tr td:nth-child(1) {
+    width: 10%; /* Cột ID */
+    text-align: center;
+}
+table tr th:nth-child(4), table tr td:nth-child(4) {
+    width: 15%; /* Cột Chi tiết */
+    text-align: center;
+}

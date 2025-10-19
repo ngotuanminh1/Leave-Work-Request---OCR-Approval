@@ -1,0 +1,132 @@
+/* Thiết lập cơ bản cho toàn bộ trang */
+body {
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    background-color: #f4f7f9; /* Màu nền nhẹ nhàng */
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa nội dung theo chiều ngang */
+}
+
+/* Tiêu đề chính */
+h1 {
+    color: #007bff; /* Màu xanh dương hiện đại */
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Container chứa form để tạo độ tập trung */
+form {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Đổ bóng nhẹ tạo chiều sâu */
+    width: 100%;
+    max-width: 600px; /* Giới hạn chiều rộng của form */
+    margin-bottom: 30px;
+}
+
+/* Định dạng chung cho các dòng input */
+form > * {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Định dạng nhãn và input/textarea */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    box-sizing: border-box; /* Quan trọng để padding không làm tăng chiều rộng */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #f9f9f9;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none; /* Bỏ viền mặc định của trình duyệt */
+    background-color: #ffffff;
+}
+
+/* Trường Trạng thái tiếp theo (Readonly) */
+input[name="next_step"] {
+    background-color: #e9ecef; /* Màu xám nhạt để phân biệt với trường có thể chỉnh sửa */
+    color: #495057;
+    font-weight: bold;
+}
+
+textarea {
+    resize: vertical; /* Chỉ cho phép kéo dãn theo chiều dọc */
+    min-height: 100px;
+}
+
+/* Nút Submit */
+button[type="submit"] {
+    background-color: #28a745; /* Màu xanh lá (thành công) */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.1s;
+    width: 100%; /* Chiếm hết chiều rộng */
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838; /* Đậm hơn khi hover */
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px); /* Hiệu ứng nhấn nút */
+}
+
+/* Khu vực hiển thị ảnh và OCR */
+h3 {
+    color: #6c757d;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Ảnh đơn */
+img {
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin: 0 auto 20px auto; /* Căn giữa ảnh */
+    max-width: 100% !important; /* Đảm bảo ảnh không vượt quá container */
+    height: auto;
+}
+
+/* Khu vực kết quả OCR */
+pre {
+    background-color: #e9ecef; /* Nền xám nhạt */
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto; /* Cuộn ngang nếu nội dung quá dài */
+    white-space: pre-wrap; /* Ngắt dòng cho nội dung OCR */
+    word-wrap: break-word; /* Ngắt từ nếu cần */
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    border: 1px solid #dee2e6;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 40px;
+}

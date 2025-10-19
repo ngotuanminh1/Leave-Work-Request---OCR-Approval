@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Quản Lý Đơn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dbadmin.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: #f7f9fc;
+            color: #333;
+        }
+
+        /* Sidebar (Giữ nguyên) */
+        .sidebar {
+            background-color: #2c3e50;
+            width: 250px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin: 1rem;
+        }
+
+        .sidebar h4 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.75rem 0.75rem;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+            color: #1abc9c;
+        }
+
+        .nav-logout {
+            margin-top: auto;
+            color: #e74c3c !important;
+        }
+
+        .nav-logout:hover {
+            background-color: #c0392b !important;
+            color: white !important;
+        }
+
+        /* Main Content */
+        .content {
+            flex-grow: 1;
+            padding: 2rem 3rem;
+            overflow-y: auto;
+            background-color: white;
+            margin: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h1,
+        .content h2 {
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #2c3e50;
+            border-bottom: 2px solid #1abc9c;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Custom styles for Status and Actions */
+        .badge {
+            display: inline-block;
+            padding: 0.3em 0.6em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+        }
+
+        /* Màu sắc cho trạng thái (cần thêm logic Jinja2 trong <td>) */
+        .badge-waiting {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .badge-approved {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-rejected {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-action-group {
+            white-space: nowrap;
+        }
+
+        .btn-action-group button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h4>Admin Panel</h4>
+        <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+        <a href="{{ url_for('quan_ly_don') }}">📄 Quản lý đơn</a>
+        <a href="{{ url_for('thong_ke') }}">📊 Thống kê & Báo cáo</a>
+        <a href="{{ url_for('quan_ly_nhan_vien') }}">👨‍💼 Quản lý nhân viên</a>
+        <a href="{{ url_for('cai_dat') }}">⚙️ Cài đặt hệ thống</a>
+        <a href="{{ url_for('logout') }}" class="text-danger nav-logout">🚪 Đăng xuất</a>
+    </div>
+
+    <div class="content">
+        <h1>Quản Lý Tổng quan Đơn từ</h1>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <h5>Tổng quan đơn</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">Đơn đang chờ duyệt: {{ don_waiting|default(0) }}</li>
+                    <li class="list-group-item">Đơn đã duyệt: {{ don_approved|default(0) }}</li>
+                    <li class="list-group-item">Đơn bị từ chối: {{ don_rejected|default(0) }}</li>
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <div id="chart-data"
+                    data-values="{{ [don_waiting|default(0), don_approved|default(0), don_rejected|default(0)] | join(',') }}">
+                </div>
+                <canvas id="chartDon"></canvas>
+            </div>
+        </div>
+
+        <form method="GET" class="mt-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên, mã đơn..."
+                    value="{{ request.args.get('search', '') }}">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Người nộp</th>
+                    <th>Loại đơn</th>
+                    <th>Trạng thái</th>
+                    <th>Chi tiết</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in dons %}
+                <tr>
+                    <td>{{ d.id }}</td>
+                    <td>{{ d.ho_ten }}</td>
+                    <td>{{ d.loai_don }}</td>
+                    <td>
+                        {% set status = d.trang_thai|lower %}
+
+                        {% if 'chờ duyệt' in status %}
+                        {% set approver = d.nguoi_duyet_hien_tai|lower %}
+                        <span class="badge badge-warning badge-waiting">
+                            Chờ duyệt
+                        </span>
+
+                        {% if approver.startswith('quan_ly_cua_') %}
+                        {% set phong_name = approver.split('_cua_')[1].replace('_', ' ')|title %}
+                        <small class="d-block text-muted">({{ phong_name }})</small>
+                        {% elif approver == 'nhan_su' %}
+                        <small class="d-block text-muted">(Phòng Nhân sự)</small>
+                        {% elif approver == 'ke_toan' %}
+                        <small class="d-block text-muted">(Phòng Kế toán)</small>
+                        {% elif approver == 'giam_doc' %}
+                        <small class="d-block text-muted">(Ban Giám đốc)</small>
+                        {% endif %}
+
+                        {% elif 'đã duyệt' in status or 'hoàn tất' in status %}
+                        <span class="badge badge-success badge-approved">Đã duyệt</span>
+                        <small class="d-block text-muted">(Hoàn tất)</small>
+                        {% elif 'từ chối' in status %}
+                        <span class="badge badge-danger badge-rejected">Từ chối</span>
+                        {% else %}
+                        <span class="badge badge-info">{{ d.trang_thai }}</span>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ url_for('don_detail', don_id=d.id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
+                    </td>
+                    <td>
+                        {% set db_approver = d.nguoi_duyet_hien_tai|lower|trim %}
+
+                        {% if d.trang_thai|lower == 'chờ duyệt' and db_approver == role_filter|lower|trim %}
+                        <div class="btn-action-group">
+                            <button class="btn btn-success btn-sm" data-action="duyet" data-id="{{ d.id }}">Duyệt</button>
+                            
+                            <button class="btn btn-danger btn-sm" 
+                                    data-action="tuchoi" 
+                                    data-id="{{ d.id }}"
+                                    data-toggle="modal" 
+                                    data-target="#rejectReasonModal">Từ chối</button>
+                        </div>
+                        {% else %}
+                        <span class="text-muted small">Đã xử lý</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Không có đơn nào</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="modal fade" id="rejectReasonModal" tabindex="-1" role="dialog" aria-labelledby="rejectReasonLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectReasonLabel">Nhập Lý do Từ chối Đơn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="rejectForm" method="POST" action="">
+                    <div class="modal-body">
+                        <input type="hidden" name="don_id" id="modal_don_id"> 
+                        <p>Vui lòng giải thích rõ lý do đơn bị từ chối:</p>
+                        <div class="form-group">
+                            <textarea class="form-control" id="ly_do_tu_choi" name="ly_do_tu_choi" rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Xác nhận Từ chối</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // HÀM XỬ LÝ DUYỆT (Gửi form POST)
+        function handleDuyetAction(id) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+
+            // Dùng template URL an toàn
+            const urlTemplate = "{{ url_for('duyet_don', don_id=99999) }}";
+            form.action = urlTemplate.replace('99999', id);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // HÀM XỬ LÝ SỰ KIỆN CLICK CHUNG
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.querySelector('.table');
+
+            if (table) {
+                table.addEventListener('click', (e) => {
+                    const button = e.target.closest('button[data-action]');
+
+                    if (button) {
+                        const action = button.dataset.action;
+                        const id = button.dataset.id;
+                        let confirmationMessage = '';
+                        
+                        // Xử lý nút DUYỆT (không dùng modal)
+                        if (action === 'duyet') {
+                            confirmationMessage = `Bạn có chắc chắn muốn DUYỆT đơn ID ${id} không?`;
+                            if (confirm(confirmationMessage)) {
+                                handleDuyetAction(id);
+                            }
+                        } 
+                        // Nút TỪ CHỐI được xử lý bởi Bootstrap Modal (data-toggle)
+                        // Chúng ta không cần làm gì ở đây ngoại trừ trường hợp muốn chặn modal
+                    }
+                });
+            }
+            
+            // LOGIC KHỞI TẠO MODAL VÀ ĐIỀN ID ĐƠN
+            $('#rejectReasonModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Nút 'Từ chối' kích hoạt modal
+                var donId = button.data('id');      // Lấy ID đơn từ data-id
+                
+                var modal = $(this);
+                modal.find('#modal_don_id').val(donId); // Điền ID vào hidden input
+                
+                // Cập nhật action của form để trỏ đến route tu_choi_don
+                const urlTemplate = "{{ url_for('tu_choi_don', don_id=99999) }}";
+                modal.find('#rejectForm').attr('action', urlTemplate.replace('99999', donId));
+                
+                // Xóa nội dung cũ khi mở modal
+                modal.find('#ly_do_tu_choi').val(''); 
+            });
+
+
+            // Hàm vẽ biểu đồ (Giữ nguyên logic của bạn)
+            (function () {
+                const chartDataEl = document.getElementById('chart-data');
+                const raw = chartDataEl ? (chartDataEl.dataset.values || '') : '';
+                const dataDon = raw.split(',').map(x => {
+                    const n = Number(x);
+                    return Number.isFinite(n) ? n : 0;
+                });
+                while (dataDon.length < 3) dataDon.push(0);
+
+                const ctx = document.getElementById('chartDon').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Chờ duyệt', 'Đã duyệt', 'Từ chối'],
+                        datasets: [{
+                            data: dataDon,
+                            backgroundColor: ['#ffc107', '#28a745', '#dc3545'],
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            title: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            })();
+        });
+    </script>
+
+</body>
+
+</html>

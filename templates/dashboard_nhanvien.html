@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Nhân viên</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <style>
+        /* Tối ưu hiển thị cho Nhân viên */
+        .badge-warning { background-color: #ffc107; color: #333; }
+        .badge-success { background-color: #28a745; color: white; }
+        .badge-danger { background-color: #dc3545; color: white; }
+        .badge { padding: 5px 10px; border-radius: 4px; font-weight: 700; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border: 1px solid #ccc; }
+        th { background-color: #475f46; }
+    </style>
+</head>
+
+<body>
+    <h1>Đơn của bạn</h1>
+    <a href="{{ url_for('index') }}">Nộp đơn mới</a> | <a href="{{ url_for('logout') }}">Đăng xuất</a>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Loại đơn</th>
+                <th>Trạng thái</th>
+                <th>Cấp duyệt hiện tại</th> <th>Chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in dons %}
+            <tr>
+                <td>{{ d.id }}</td>
+                <td>{{ d.loai_don }}</td>
+                
+                <td>
+                    {% set status = d.trang_thai|lower %}
+                    {% if 'chờ duyệt' in status %}
+                        <span class="badge badge-warning">Chờ duyệt</span>
+                    {% elif 'đã duyệt' in status or 'hoàn tất' in status %}
+                        <span class="badge badge-success">Đã duyệt</span>
+                    {% elif 'từ chối' in status %}
+                        <span class="badge badge-danger">Từ chối</span>
+                    {% else %}
+                        {{ d.trang_thai }}
+                    {% endif %}
+                </td>
+                
+                <td>
+                    {% set approver = d.nguoi_duyet_hien_tai|lower|trim %}
+                    
+                    {% if 'chờ duyệt' in d.trang_thai|lower %}
+                        {% if approver.startswith('quan_ly_cua_') %}
+                            {% set parts = approver.split('_cua_') %}
+                            {% set phong_name = parts[1].replace('_', ' ')|title if parts|length > 1 else 'Quản lý cấp 1' %}
+                            <span class="text-info">Quản lý {{ phong_name }}</span>
+                            
+                        {% elif approver == 'nhan_su' %}
+                            <span class="text-info">Phòng Nhân sự</span>
+                            
+                        {% elif approver == 'ke_toan' %}
+                            <span class="text-info">Phòng Kế toán</span>
+                            
+                        {% elif approver == 'giam_doc' %}
+                            <span class="text-info">Ban Giám đốc</span>
+                        
+                        {% else %}
+                            <span class="text-muted">Đang chờ xử lý...</span>
+                        {% endif %}
+                        
+                    {% else %}
+                        <span class="text-muted">Hoàn tất quy trình</span>
+                    {% endif %}
+                </td>
+                
+                <td><a href="{{ url_for('don_detail', don_id=d.id) }}">Xem</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

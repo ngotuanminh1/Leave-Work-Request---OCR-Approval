@@ -1,0 +1,8 @@
+Flask
+easyocr
+numpy
+werkzeug
+flask-login
+google-genai
+python-dotenv
+requests

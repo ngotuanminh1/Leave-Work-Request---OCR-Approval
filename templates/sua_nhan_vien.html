@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa thông tin nhân viên</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.8em;
+        }
+
+        form label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        form input[type="text"],
+        form input[type="password"],
+        form select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="password"]:focus,
+        form select:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 5px rgba(26, 115, 232, 0.2);
+        }
+
+        .action-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-save {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background-color: #0c59b2;
+        }
+
+        .btn-cancel {
+            background-color: #e9ecef;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background-color: #d0d3d6;
+        }
+
+        .readonly-field {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sửa thông tin nhân viên ID {{ nv.id }}</h1>
+
+        <form method="POST" action="{{ url_for('sua_nhan_vien', nv_id=nv.id) }}">
+            
+            <label for="username">Tên đăng nhập (Username):</label>
+            <input type="text" id="username" name="username" value="{{ nv.username }}" readonly class="readonly-field" />
+
+            <label for="ho_ten">Họ tên:</label>
+            <input type="text" id="ho_ten" name="ho_ten" value="{{ nv.ho_ten or '' }}" required />
+
+            <label for="ma_nv">Mã nhân viên:</label>
+            <input type="text" id="ma_nv" name="ma_nv" value="{{ nv.ma_nv or '' }}" required />
+
+            <label for="phong_ban">Phòng ban:</label>
+            <input type="text" id="phong_ban" name="phong_ban" value="{{ nv.phong_ban or '' }}" />
+
+            <label for="chuc_vu">Chức vụ:</label>
+            <input type="text" id="chuc_vu" name="chuc_vu" value="{{ nv.chuc_vu or '' }}" />
+
+            <label for="role">Vai trò (Phân quyền):</label>
+            <select id="role" name="role" required>
+                <option value="nhan_vien" {% if nv.role == 'nhan_vien' %}selected{% endif %}>Nhân viên</option>
+                <option value="quan_ly" {% if nv.role == 'quan_ly' %}selected{% endif %}>Quản lý</option>
+                <option value="nhan_su" {% if nv.role == 'nhan_su' %}selected{% endif %}>Nhân Sự</option>
+                <option value="ke_toan" {% if nv.role == 'ke_toan' %}selected{% endif %}>Kế toán</option>
+                <option value="giam_doc" {% if nv.role == 'giam_doc' %}selected{% endif %}>Giám đốc</option>
+            </select>
+            
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" value="{{ nv.email or '' }}" />
+            
+            <hr style="margin: 30px 0 15px; border-color: #f0f2f5;">
+
+            <label for="password">Đổi mật khẩu (Để trống nếu không đổi):</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu mới" />
+
+
+            <div class="action-buttons">
+                <button type="submit" class="btn btn-save">Lưu thay đổi</button>
+                <a href="{{ url_for('quan_ly_nhan_vien') }}" class="btn btn-cancel">Hủy</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

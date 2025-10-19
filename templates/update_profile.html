@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật thông tin</title>
+</head>
+<body>
+    <h1>📝 Cập nhật thông tin cá nhân</h1>
+    <form method="post">
+        <label>Họ tên:</label><br>
+        <input type="text" name="ho_ten" value="{{ user['ho_ten'] or '' }}" required><br><br>
+
+        <label>Phòng ban:</label><br>
+        <input type="text" name="phong_ban" value="{{ user['phong_ban'] or '' }}" required><br><br>
+
+        <label>Chức vụ:</label><br>
+        <input type="text" name="chuc_vu" value="{{ user['chuc_vu'] or '' }}"><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" value="{{ user['email'] or '' }}"><br><br>
+
+        <button type="submit">Lưu thông tin</button>
+    </form>
+</body>
+</html>

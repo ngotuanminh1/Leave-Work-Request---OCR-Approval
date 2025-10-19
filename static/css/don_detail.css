@@ -1,0 +1,118 @@
+/* Tối ưu hóa CSS cho file HTML chi tiết đơn (detail.html) */
+
+/* Thiết lập cơ bản */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Container cho phần thông tin chi tiết (Áp dụng cho các thẻ <p> trực tiếp) */
+body > p {
+    background-color: #ffffff;
+    padding: 12px 40px;
+    margin: 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 650px;
+    box-sizing: border-box; /* Quan trọng để padding không làm tràn width */
+}
+
+/* Định dạng thẻ <p> đầu tiên và cuối cùng để làm nổi bật container */
+body > p:first-of-type {
+    padding-top: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng chỉ ở trên */
+}
+
+body > p:nth-last-of-type(3) { /* Thẻ <p> chứa Lý do */
+    padding-bottom: 20px;
+}
+
+body > p:nth-last-of-type(2) { /* Thẻ <p> chứa Trạng thái */
+    border-bottom: none;
+    padding-bottom: 30px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng chỉ ở dưới */
+}
+
+/* Định dạng các thẻ <strong> (nhãn) */
+body > p strong {
+    color: #007bff;
+    min-width: 150px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+/* Tiêu đề phụ (Ảnh, OCR) */
+h3 {
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 5px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    width: 100%;
+    max-width: 650px;
+}
+
+/* Ảnh đơn */
+img {
+    display: block;
+    border: 3px solid #dee2e6;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin: 10px auto 25px auto;
+    max-width: 100% !important;
+    height: auto;
+}
+
+/* Khu vực kết quả OCR */
+pre {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    border: 1px solid #dee2e6;
+    width: 100%;
+    max-width: 650px;
+    margin-bottom: 40px;
+}
+
+/* Liên kết trở về */
+body > br ~ a { /* Chọn thẻ <a> sau thẻ <br> */
+    color: #6c757d;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+}
+
+body > br ~ a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

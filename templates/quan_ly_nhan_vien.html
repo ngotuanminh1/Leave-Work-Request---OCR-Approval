@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý nhân viên</title>
+    <style>
+        /* CSS Tinh chỉnh để hiện đại và chuyên nghiệp */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 30px; 
+            background-color: #f4f7f9; 
+            color: #333; 
+        }
+        h1 { 
+            color: #1a73e8; 
+            margin-bottom: 25px; 
+            border-bottom: 2px solid #e9ecef; 
+            padding-bottom: 10px; 
+            font-weight: 600; 
+        }
+        
+        /* Bảng */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            background-color: white; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+        th, td { 
+            border: 1px solid #eee; 
+            padding: 12px 15px; 
+            text-align: left; 
+        }
+        th { 
+            background: #e8f0fe; 
+            color: #1a73e8; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 0.9em; 
+        }
+        
+        /* Containers và Buttons */
+        .btn-add-container { margin-bottom: 20px; }
+        .btn { 
+            padding: 8px 14px; 
+            border: none; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            font-size: 0.9em; 
+            transition: background-color 0.2s, box-shadow 0.2s; 
+            text-decoration: none; 
+            display: inline-block; 
+        }
+        
+        /* Thêm */
+        .btn-add { background: #34a853; color: white; }
+        .btn-add:hover { background: #2b8e44; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        
+        /* Sửa */
+        .btn-edit { background: #1a73e8; color: white; margin-right: 5px; }
+        .btn-edit:hover { background: #0c59b2; }
+        
+        /* Xóa */
+        .btn-delete { background: #dc3545; color: white; }
+        .btn-delete:hover { background: #c0392b; }
+
+        /* Căn chỉnh cột Hành động */
+        td:last-child {
+            white-space: nowrap;
+            width: 1%;
+        }
+    </style>
+</head>
+<body>
+    <h1>👥 Quản lý nhân viên</h1>
+
+    {% if role == "giam_doc" or role == "quan_ly" %}
+        <div class="btn-add-container">
+            <a href="{{ url_for('them_nhan_vien') }}" class="btn btn-add">+ Thêm nhân viên</a>
+        </div>
+    {% endif %}
+
+    {% if nhanviens|length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên nhân viên</th>
+                <th>Phòng ban</th>
+                <th>Chức vụ</th>
+                <th>Email</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for nv in nhanviens %}
+    <tr>
+        <td>{{ nv.id }}</td>
+        <td>{{ nv.ho_ten or nv.username }}</td>
+        <td>{{ nv.phong_ban }}</td>
+        <td>{{ nv.chuc_vu or nv.role }}</td>
+        <td>{{ nv.email or 'N/A' }}</td> 
+        <td>
+            {% if role in ["giam_doc", "quan_ly"] %}
+                <a href="{{ url_for('sua_nhan_vien', nv_id=nv.id) }}" class="btn btn-edit">Sửa</a>
+                
+                <button class="btn btn-delete" 
+                        data-id="{{ nv.id }}" 
+                        data-name="{{ nv.ho_ten or nv.username }}">Xóa</button>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+        <p><i>Không có nhân viên nào để hiển thị.</i></p>
+    {% endif %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableBody = document.querySelector('table tbody');
+            
+            if (tableBody) {
+                // Lắng nghe sự kiện click trên toàn bộ bảng
+                tableBody.addEventListener('click', (e) => {
+                    // Kiểm tra xem nút được click có phải là nút xóa không
+                    const deleteButton = e.target.closest('.btn-delete');
+                    
+                    if (deleteButton) {
+                        // Đọc dữ liệu từ data attributes
+                        const id = deleteButton.dataset.id;
+                        const name = deleteButton.dataset.name;
+                        
+                        if (confirm(`Bạn có chắc chắn muốn xóa nhân viên ${name} (ID: ${id}) không? Hành động này không thể hoàn tác.`)) {
+                            // Tạo và gửi form POST an toàn
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            // Thiết lập action (thay thế placeholder bằng ID thực tế)
+                            // Sử dụng logic URL đã được chứng minh là an toàn trong Flask
+                            form.action = "{{ url_for('xoa_nhan_vien', nv_id=99999) }}".replace('99999', id);
+                            
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

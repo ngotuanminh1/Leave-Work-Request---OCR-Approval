@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Trang Nhân Viên</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset đơn giản */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: #f7f9fc;
+      color: #333;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: #2c3e50;
+      width: 250px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1rem;
+    }
+
+    .sidebar h2 {
+      font-weight: 700;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-item {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s ease;
+      padding: 0.4rem 0.7rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .info-box {
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px 30px;
+      margin-top: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    #thongTin p {
+      margin: 10px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px dashed #f0f0f0;
+      /* Đường nét đứt mờ */
+      font-size: 1.05rem;
+    }
+
+    #thongTin strong {
+      color: #2c3e50;
+      /* Màu đậm cho nhãn */
+      display: inline-block;
+      min-width: 140px;
+      /* Cố định chiều rộng nhãn */
+      font-weight: 600;
+    }
+
+    /* --- STYLE RIÊNG CHO SECTION GỬI ĐƠN (FORM) --- */
+    .nav-link:hover,
+    .nav-link.active {
+      background-color: #34495e;
+      color: #1abc9c;
+    }
+
+    .nav-link .material-icons {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+
+    .nav-logout {
+      margin-top: auto;
+      color: #e74c3c !important;
+    }
+
+    .nav-logout:hover {
+      background-color: #c0392b !important;
+      color: white !important;
+    }
+
+    /* Content chính bên phải */
+    .content {
+      flex-grow: 1;
+      padding: 2rem 3rem;
+      overflow-y: auto;
+      background: white;
+      box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+      border-radius: 8px;
+      margin: 1.5rem;
+    }
+
+    .content h1 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+      border-bottom: 2px solid #1abc9c;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Form đơn giản cho phần gửi đơn */
+    form label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    form input[type="text"],
+    form textarea,
+    form input[type="file"] {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    form input[type="text"]:focus,
+    form textarea:focus,
+    form input[type="file"]:focus {
+      border-color: #1abc9c;
+      outline: none;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    form input[type="radio"] {
+      margin-right: 6px;
+      transform: scale(1.2);
+      vertical-align: middle;
+    }
+
+    form button {
+      margin-top: 25px;
+      background-color: #1abc9c;
+      border: none;
+      padding: 12px 25px;
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+    }
+
+    form button:hover {
+      background-color: #16a085;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0.5rem 1rem;
+      }
+
+      .sidebar h2 {
+        flex: 0 0 auto;
+        margin: 0 1rem 0 0;
+      }
+
+      .nav-item {
+        margin: 0 1rem 0 0;
+      }
+
+      .content {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="sidebar">
+    <h2>DNU</h2>
+    <ul>
+      <li class="nav-item">
+        <a href="#" class="nav-link active" onclick="showSection('thongbao')">
+          <span class="material-icons">notifications</span>
+          Thông báo
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="showSection('caiDat')">
+          <span class="material-icons">settings</span>
+          Cài đặt
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="showSection('thongTin')">
+          <span class="material-icons">person</span>
+          Thông tin nhân viên
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="showSection('donTu')">
+          <span class="material-icons">description</span>
+          Đơn từ
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url_for('dashboard_nhanvien') }}" class="nav-link">
+          <span class="material-icons">description</span>
+          Lịch sử Đơn từ
+        </a>
+      </li>
+      <li class="nav-item nav-logout">
+        <a href="{{ url_for('logout') }}" class="nav-link nav-logout">
+          <span class="material-icons">logout</span>
+          Đăng xuất
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    <!-- Thông báo -->
+    <section id="thongbao" class="section active">
+      <h1>Thông báo & Trạng thái Đơn</h1>
+
+      <h2 style="margin-top: 30px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+        Trạng thái Đơn mới nhất
+      </h2>
+
+      {% if dons %}
+      <div class="info-box">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background-color: #eee;">
+              <th style="padding: 10px; text-align: left;">ID</th>
+              <th style="padding: 10px; text-align: left;">Loại đơn</th>
+              <th style="padding: 10px; text-align: left;">Trạng thái</th>
+              <th style="padding: 10px; text-align: left;">Cấp duyệt</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for d in dons %}
+            <tr>
+              <td style="padding: 10px;">{{ d.id }}</td>
+              <td style="padding: 10px;">{{ d.loai_don }}</td>
+              <td style="padding: 10px;">
+                {% set status = d.trang_thai|lower %}
+                {% if 'chờ duyệt' in status %}
+                <span class="badge badge-warning">Chờ duyệt</span>
+                {% elif 'đã duyệt' in status or 'hoàn tất' in status %}
+                <span class="badge badge-success">Đã duyệt</span>
+                {% elif 'từ chối' in status %}
+                <span class="badge badge-danger">Từ chối</span>
+                {% else %}
+                <span class="badge badge-info">{{ d.trang_thai }}</span>
+                {% endif %}
+              </td>
+              <td style="padding: 10px;">
+                {% set approver = d.nguoi_duyet_hien_tai|lower|trim %}
+                {% if 'chờ duyệt' in status and approver and approver != 'đã duyệt' %}
+                {% if approver.startswith('quan_ly_cua_') %}
+                {% set phong_name = approver.split('_cua_')[1].replace('_', ' ')|title %}
+                Quản lý {{ phong_name }}
+                {% elif approver == 'nhan_su' %}{% set name = 'Phòng Nhân sự' %}
+                {% elif approver == 'ke_toan' %}{% set name = 'Phòng Kế toán' %}
+                {% elif approver == 'giam_doc' %}{% set name = 'Ban Giám đốc' %}
+                {% else %}{{ approver|title }}
+                {% endif %}
+                {% elif 'đã duyệt' in status %}
+                Hoàn tất
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted">Bạn chưa có đơn từ nào được gửi.</p>
+      {% endif %}
+
+    </section>
+
+    <!-- Cài đặt -->
+    <section id="caiDat" class="section" style="display:none;">
+      <h1>Cài đặt</h1>
+      <p>Phần cài đặt sẽ được cập nhật sau.</p>
+    </section>
+
+    <!-- Thông tin nhân viên -->
+    <section id="thongTin" class="section" style="display:none;">
+      <h1>Thông tin nhân viên</h1>
+
+      <p><strong>Họ tên:</strong> {{ session.get('ho_ten', session.get('username')) }}</p>
+
+      <p><strong>Mã nhân viên:</strong> {{ session.get('ma_nv', 'Chưa cập nhật') }}</p>
+      <p><strong>Phòng ban:</strong> {{ session.get('phong_ban', 'Chưa cập nhật') }}</p>
+      <p><strong>Email:</strong> {{ session.get('email', 'Chưa cập nhật') }}</p>
+
+      <p><strong>Chức vụ:</strong> {{ session.get('chuc_vu', 'Nhân viên') }}</p>
+      <p><strong>Số điện thoại:</strong> {{ session.get('phone', 'Chưa cập nhật') }}</p>
+
+    </section>
+
+    <!-- Gửi đơn -->
+    <section id="donTu" class="section" style="display:none;">
+      <h1>Gửi đơn mới</h1>
+      <p>Xin chào, {{ session.get('username') }}</p>
+
+      <form method="post" enctype="multipart/form-data">
+        <label>
+          <input type="radio" name="mode" value="upload" checked />
+          Upload ảnh đơn
+        </label>
+        <input type="file" name="file" accept="image/*" />
+
+        <label>
+          <input type="radio" name="mode" value="nhap_tay" />
+          Nhập tay đơn
+        </label>
+
+        <label>Họ tên:</label>
+        <input type="text" name="ho_ten" />
+
+        <label>Mã NV:</label>
+        <input type="text" name="ma_nv" />
+
+        <label>Phòng ban:</label>
+        <input type="text" name="phong_ban" />
+
+        <label>Loại đơn:</label>
+        <input type="text" name="loai_don" />
+
+        <label>Ngày bắt đầu:</label>
+        <input type="text" name="ngay_bat_dau" placeholder="dd/mm/yyyy" />
+
+        <label>Ngày kết thúc:</label>
+        <input type="text" name="ngay_ket_thuc" placeholder="dd/mm/yyyy" />
+
+        <label>Lý do:</label>
+        <textarea name="ly_do"></textarea>
+
+        <button type="submit">Tiếp tục</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function showSection(sectionId) {
+      // Ẩn tất cả section
+      document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Bỏ class active khỏi tất cả nav-link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // Hiện section được chọn
+      document.getElementById(sectionId).style.display = 'block';
+
+      // Thêm class active cho nav-link tương ứng
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        const link = item.querySelector('a');
+        if (link && link.getAttribute('onclick') && link.getAttribute('onclick').includes(sectionId)) {
+          link.classList.add('active');
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

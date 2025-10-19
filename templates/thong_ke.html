@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thống kê & Báo cáo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #1a73e8;
+            font-weight: 700;
+            border-bottom: 3px solid #1abc9c;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #3c4043;
+            font-size: 1.5rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Box Chỉ số KPI */
+        .kpi-box {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .kpi-box .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .kpi-box .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Bảng Phân tích */
+        .table th {
+            background-color: #f7f7f7;
+            color: #5f6368;
+        }
+
+        .table td {
+            font-size: 0.95rem;
+        }
+
+        /* Vùng Chart */
+        .chart-container {
+            height: 350px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 Thống kê & Báo cáo Đơn từ</h1>
+
+        <h2>1. Hiệu suất Quy trình Duyệt</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="kpi-box">
+                    <span class="value">{{ stats.approval_rate|default(0) }}%</span>
+                    <span class="label">Tỷ lệ Duyệt thành công</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kpi-box" style="background-color: #fff3e0; color: #ff6f00;">
+                    <span class="value">{{ stats.avg_time_days|default(0) }} ngày</span>
+                    <span class="label">Thời gian Duyệt TB (TAT)</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kpi-box" style="background-color: #e8f5e9; color: #388e3c;">
+                    <span class="value">{{ stats.total_submitted|default(0) }}</span>
+                    <span class="label">Tổng số đơn đã nộp</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-5">3. Phân tích theo Đơn vị Tổ chức</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">Tình trạng Đơn đang chờ (Theo Người duyệt)</div>
+                    <div class="card-body">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Người duyệt</th>
+                                    <th>Số đơn đang chờ</th>
+                                    <th>TAT TB (Ngày)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for person in stats.waiting_by_approver %}
+                                <tr>
+                                    <td>{{ person.name }}</td>
+                                    <td><span class="badge badge-warning">{{ person.count }}</span></td>
+                                    <td>{{ person.avg_tat }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">Tỷ lệ Duyệt theo Phòng ban</div>
+                    <div class="card-body">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Phòng ban</th>
+                                    <th>Đơn đã duyệt</th>
+                                    <th>Đơn bị từ chối</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for dept in stats.approval_by_dept %}
+                                <tr>
+                                    <td>{{ dept.name }}</td>
+                                    <td><span class="badge badge-success">{{ dept.approved }}</span></td>
+                                    <td><span class="badge badge-danger">{{ dept.rejected }}</span></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        // Hàm đọc dữ liệu an toàn từ data attributes (đã được Jinja2 |tojson xử lý)
+        function getChartData(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return { labels: [], values: [] };
+
+            // Dữ liệu từ Jinja2 |tojson là chuỗi JSON, cần parse
+            const labels = JSON.parse(el.dataset.labels || '[]');
+            const values = JSON.parse(el.dataset.values || '[]');
+
+            return { labels, values };
+        }
+
+        // --- 1. Biểu đồ Loại Đơn (Pie Chart) ---
+        (function () {
+            const data = getChartData('type-data');
+            if (data.values.length === 0) return;
+
+            new Chart(document.getElementById('typeChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: ['#1a73e8', '#34a853', '#fbbc04', '#ea4335', '#9a1a73'],
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right' } }
+                }
+            });
+        })();
+
+        // --- 2. Biểu đồ Xu hướng (Line Chart) ---
+        (function () {
+            const data = getChartData('trend-data');
+            if (data.values.length === 0) return;
+
+            new Chart(document.getElementById('trendChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Tổng số ngày nghỉ được duyệt',
+                        data: data.values,
+                        borderColor: '#1a73e8',
+                        backgroundColor: 'rgba(26, 115, 232, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Số ngày nghỉ' } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
