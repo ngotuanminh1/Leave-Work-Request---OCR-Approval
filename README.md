@@ -109,22 +109,22 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
 
   <strong>1. Tạo môi trường ảo (Virtual Environment): </strong><br>
  
-  <code>python -m venv venv
-    # Kích hoạt môi trường ảo:
-    # Trên Windows: .\venv\Scripts\activate
-    # Trên macOS/Linux: source venv/bin/activate</code><br><br>
+  <code>    python -m venv venv
+            # Kích hoạt môi trường ảo:
+            # Trên Windows: .\venv\Scripts\activate
+            # Trên macOS/Linux: source venv/bin/activate</code><br><br>
   
   <strong>2. Lệnh cài thư viện:</strong><br>
   - (Tùy chọn) Tạo môi trường ảo (nên dùng <code>pip install -r requirements.txt</code>):<br>
   <p><code># Nếu chưa có requirements.txt, bạn có thể tạo thủ công bằng cách liệt kê các gói sau:</code></p>
-  <code># Flask
-        # python-dotenv
-        # Flask-Mail
-        # Werkzeug
-        # opencv-python
-        # pytesseract
-        # unidecode
-        # google-generativeai</code><br><br>
+    <code>  # Flask
+            # python-dotenv
+            # Flask-Mail
+            # Werkzeug
+            # opencv-python
+            # pytesseract
+            # unidecode
+            # google-generativeai</code><br><br>
 
   <strong>4. Cài đặt Tesseract OCR Engine: </strong><br>
   <p><br>Windows: </br> tải xuống trình cài đặt từ Tesseract-OCR GitHub. Đảm bảo thêm đường dẫn<code>tesseract.exe </code>vào biến môi trường<code> PATH.</code></p>
