@@ -43,6 +43,41 @@ Chúng tôi giải quyết thách thức lớn nhất là xử lý **văn bản 
 
 <hr>
 
+
+
+<h2 align="center">✨ Tính năng Chính</h2>
+
+* **Tải lên Đơn từ:** Người dùng có thể dễ dàng tải lên ảnh chụp hoặc tệp PDF của các loại đơn từ khác nhau.
+
+* **Trích xuất Dữ liệu thông minh (OCR & AI):**
+    * Sử dụng **Pytesseract** để nhận diện và trích xuất văn bản từ hình ảnh/PDF.
+    * Tích hợp **Google Gemini** để làm sạch dữ liệu OCR thô, sau đó phân tích và trích xuất các trường thông tin quan trọng như Họ tên, Mã nhân viên, Phòng ban, Loại đơn, Ngày bắt đầu/kết thúc, Lý do, v.v., thành định dạng JSON có cấu trúc.
+    * Cơ chế **fallback (dự phòng)** thông minh sử dụng Regular Expressions (Regex) để đảm bảo việc trích xuất dữ liệu vẫn hoạt động hiệu quả ngay cả khi API AI không khả dụng hoặc trả về kết quả không mong muốn.
+
+* **Quy trình Duyệt đa cấp linh hoạt:**
+    * Hỗ trợ nhiều vai trò người dùng với các quyền hạn khác nhau: `nhan_vien` (người nộp đơn), `quan_ly` (trưởng phòng), `nhan_su`, `ke_toan`, và `giam_doc`.
+    * Quy trình duyệt được tự động điều hướng và chuyển cấp dựa trên **loại đơn** và **phòng ban** của người nộp.
+    * Xử lý đặc biệt cho các đơn có "lý do đặc biệt" (ví dụ: đơn xin nghỉ hiếu hỷ, thai sản) có thể được phê duyệt tự động để tối ưu hóa quy trình.
+
+* **Quản lý người dùng tập trung:**
+    * Admin có quyền thêm mới, chỉnh sửa thông tin và phân quyền cho các tài khoản nhân viên trong hệ thống.
+
+* **Thông báo & Email tự động:**
+    * Gửi thông báo **real-time** ngay trong ứng dụng khi trạng thái của đơn từ thay đổi (ví dụ: được phê duyệt, từ chối, chuyển cấp duyệt).
+    * Tự động gửi email thông báo chi tiết (phê duyệt/từ chối) đến người nộp đơn, bao gồm cả lý do từ chối nếu có.
+
+* **Dashboard Duyệt trực quan:**
+    * Cung cấp giao diện dashboard riêng biệt, cho phép người duyệt dễ dàng xem, theo dõi và xử lý các đơn từ đang chờ sự phê duyệt của mình.
+
+* **Thống kê & Báo cáo:**
+    * Cung cấp các biểu đồ và số liệu thống kê tổng quan, giúp ban lãnh đạo và phòng ban liên quan nắm bắt tình hình xử lý đơn từ trong toàn hệ thống.
+
+* **Giao diện thân thiện:**
+    * Thiết kế giao diện người dùng đơn giản, trực quan, đảm bảo trải nghiệm dễ dàng và hiệu quả cho tất cả người dùng, từ người nộp đơn đến người duyệt.
+
+    <hr>
+
+    
 ### 💻 Công nghệ sử dụng
 
 <div align="center>
