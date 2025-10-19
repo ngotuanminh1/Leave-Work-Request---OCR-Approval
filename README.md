@@ -2,23 +2,21 @@
 🚗 Xử lý Đơn xin Nghỉ phép và Đề nghị Công tác – OCR trích dữ liệu, gửi duyệt qua hệ thống.
 </h1>
 <div align="center">
-  <img src="README/logoDaiNam.png" alt="DaiNam University Logo" width="250">
+    <img src="README/logoDaiNam.png" alt="DaiNam University Logo" width="250"> 
 </div>
 <br>
 <div align="center">
-
-[![FIT DNU](https://img.shields.io/badge/-FIT%20DNU-28a745?style=for-the-badge)](https://fitdnu.net/)
-[![DAINAM UNIVERSITY](https://img.shields.io/badge/-DAINAM%20UNIVERSITY-dc3545?style=for-the-badge)](https://dainam.edu.vn/vi)
-
+    [![FIT DNU](https://img.shields.io/badge/-FIT%20DNU-28a745?style=for-the-badge)](https://fitdnu.net/)
+    [![DAINAM UNIVERSITY](https://img.shields.io/badge/-DAINAM%20UNIVERSITY-dc3545?style=for-the-badge)](https://dainam.edu.vn/vi)
 </div>
-
 
 <hr>
 
 <h2 align="center">✨ Mô tả dự án</h2>
 <p align="justify">
-  Dự án này là một giải pháp E-Workflow <strong>(Luồng công việc điện tử)</strong> tiên tiến <strong>nhằm số hóa và tự động hóa</strong> hoàn toàn quy trình xử lý đơn hành chính <strong>(Đơn xin nghỉ, công tác, thôi việc, thanh toán)</strong>. trong môi trường doanh nghiệp.  
-  <strong>Giải quyết thách thức lớn nhất là xử lý văn bản tiếng việt</strong>, không chuẩn từ ảnh(lỗi dấu, dính chữ) bằng phương pháp lai ghép (Hybrid) giữa OCR truyền thống<strong> và Trí tuệ nhân tạo</strong> tạo sinh (LLM).
+Dự án này là một giải pháp **E-Workflow (Luồng công việc điện tử)** tiên tiến nhằm số hóa và tự động hóa hoàn toàn quy trình xử lý đơn hành chính <strong>(Đơn xin nghỉ, công tác, thôi việc, thanh toán)</strong> trong môi trường doanh nghiệp.
+<br><br>
+Chúng tôi giải quyết thách thức lớn nhất là xử lý **văn bản tiếng Việt không chuẩn** từ ảnh (lỗi dấu, dính chữ) bằng phương pháp lai ghép (**Hybrid**) giữa OCR truyền thống **và Trí tuệ nhân tạo** tạo sinh (LLM).
 </p>
 
 <hr>
@@ -28,65 +26,24 @@
 📂 OCR/
 ├── 📁 .venv/                 # Môi trường ảo Python
 ├── 📁 static/                # TÀI NGUYÊN TĨNH VÀ UPLOAD CÔNG KHAI
-│   ├── 📁 css/               # File CSS (dbadmin.css, don_detail.css, v.v.)
-│   ├── 📁 uploads/           # File ảnh gốc (sao chép từ uploads/ cho web server)
-│   └── 🖼️ README             # (Bạn đã có file README, có thể xóa file này)
+│   ├── 📁 css/
+│   ├── 📁 uploads/
+│   └── (các file hiển thị khác)
 ├── 📁 templates/             # TẤT CẢ CÁC FILE HTML (Jinja2)
 ├── 📁 uploads/               # ẢNH ĐƠN GỐC (KHÔNG CÔNG KHAI)
 ├── 📜 .env                   # Cấu hình biến môi trường (API Keys, Mail)
 ├── 📜 app.py                 # FILE CHÍNH (Routing, Flask Logic, App Config)
-├── 📜 create_users.py        # Script tạo người dùng admin/mẫu
-├── 📜 database.db            # Database SQLite (chứa dữ liệu hoạt động)
+├── 📜 database.db            # Database SQLite (sẽ được tạo tự động)
 ├── 📜 requirements.txt       # Danh sách thư viện Python
 ├── 📜 schema.sql             # Khởi tạo cấu trúc bảng (users, Don, DuyetLog, ThongBao)
-├── 📜 README.md              # TÀI LIỆU DỰ ÁN (Bản mô tả GitHub)
+└── 📘 README.md
 </pre>
-
 
 <hr>
 
-
-## 🚀 Tính Năng Chính
-
-<p>Tải lên Đơn từ: Người dùng có thể tải lên ảnh chụp hoặc file PDF của đơn từ.
-
-Trích xuất Dữ liệu (OCR & AI):
-
-Sử dụng Pytesseract để trích xuất văn bản từ hình ảnh.
-
-Tích hợp Google Gemini để làm sạch văn bản OCR và trích xuất các trường dữ liệu quan trọng (Họ tên, Mã NV, Phòng ban, Loại đơn, Ngày bắt đầu/kết thúc, Lý do) thành định dạng JSON.
-
-Cơ chế fallback sử dụng regex để parse dữ liệu nếu AI không khả dụng hoặc thất bại.
-
-Quy trình Duyệt đa cấp:
-
-Hỗ trợ nhiều vai trò người dùng: nhan_vien (người nộp đơn), quan_ly (trưởng phòng), nhan_su, ke_toan, giam_doc.
-
-Quy trình duyệt tự động chuyển cấp dựa trên loại đơn và phòng ban.
-
-Xử lý đặc biệt cho các đơn có "lý do đặc biệt" (hiếu hỷ, thai sản) có thể được duyệt tự động.
-
-Quản lý người dùng: Admin có thể thêm, sửa, xóa thông tin nhân viên và phân quyền.
-
-Thông báo & Email:
-
-Gửi thông báo real-time trong hệ thống khi trạng thái đơn thay đổi.
-
-Gửi email thông báo phê duyệt/từ chối đơn cho người nộp đơn.
-
-Dashboard duyệt: Cho phép người duyệt xem và xử lý các đơn đang chờ mình.
-
-Thống kê: Cung cấp các biểu đồ và số liệu tổng quan về tình hình đơn từ trong hệ thống.
-
-Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả người nộp và người duyệt</p>
-
-### 💻 Công nghệ sử dụng
-
-<div align="center>
-
-
-
-[![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](#)
+<h2 align="center">💻 Công nghệ sử dụng</h2>
+<div align="center">
+    [![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](#)
 [![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](#)
 [![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-for-the-badge&logo=sqlite&logoColor=white)](#)
 [![OpenCV](https://img.shields.io/badge/OpenCV-27338E?style=for-the-badge&logo=opencv&logoColor=white)](#)
@@ -101,114 +58,75 @@ Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả n
 </div>
 
 
-### 🚀 Hướng Dẫn Cài Đặt và Chạy
+<hr>
+
 
 <h2 align="center">📦 Chạy và cài đặt</h2>
 <p align="justify">
-  <strong>Chuẩn bị môi trường</strong><br>
-
-  <strong>1. Tạo môi trường ảo (Virtual Environment): </strong><br>
- 
-  <code>python -m venv venv
-        # Kích hoạt môi trường ảo:
-        # Trên Windows: .\venv\Scripts\activate
-        # Trên macOS/Linux: source venv/bin/activate</code><br><br>
-  
-  <strong>2. Lệnh cài thư viện:</strong><br>
-  - (Tùy chọn) Tạo môi trường ảo (nên dùng <code>pip install -r requirements.txt</code>):<br>
-  <p><code># Nếu chưa có requirements.txt, bạn có thể tạo thủ công bằng cách liệt kê các gói sau:</code></p>
-  <code># Flask
-        # python-dotenv
-        # Flask-Mail
-        # Werkzeug
-        # opencv-python
-        # pytesseract
-        # unidecode
-        # google-generativeai</code><br><br>
-
-  <strong>4. Cài đặt Tesseract OCR Engine: </strong><br>
-  <p><br>Windows: </br><strong> - tải xuống trình cài đặt từ Tesseract-OCR GitHub. Đảm bảo thêm đường dẫn<code>tesseract.exe </code>vào biến môi trường<code> PATH.</code></p></strong>
-  <p><br>Cài đặt ngôn ngữ tiếng Việt:</br>
-  <strong><br>-Tìm file ngôn ngữ <code>vie.traineddate</code>(có thể tải từ GitHub của Tesseract hoặc cài đặt qua gói ngôn ngữ Tesseract).<p><br></strong>
-  <strong><p>- Sao chép<code>vie.traineddata</code> vào thư mục <code>tessdata</code> của Tesseract (thường là) <code>C:\Program Files\Tesseract-OCR\tessdata</code></p><br><br></strong>
-
-  <strong>5. Cấu hình Biến Môi trường<strong><br>
-  <code>APP_SECRET_KEY="một_chuỗi_bí_mật_mạnh       _cho_flask_session"
-        GEMINI_API_KEY="YOUR_GOOGLE_GEMINI_API_KEY" # Lấy từ Google AI Studio
-        # Hoặc nếu dùng OpenAI (chỉ để fallback trong code, nên dùng Gemini nếu đã cấu hình):
-        OPENAI_API_KEY="YOUR_OPENAI_API_KEY" 
-        # Cấu hình email (Gmail SMTP)
-        MAIL_SERVER='smtp.gmail.com'
-        MAIL_PORT=587
-        MAIL_USE_TLS=True
-        MAIL_USERNAME='email_cua_ban@gmail.com' # Email dùng để gửi thông báo
-        MAIL_PASSWORD='your_app_password' # Tạo "App password" cho tài khoản Gmail của bạn
-        MAIL_DEFAULT_SENDER='email_cua_ban@gmail.com'
-        PORT=5000 # Cổng chạy ứng dụng (mặc định 5000)</code>
-  <p><em>Lưu ý về <code>MAIL_PASSWORD</code> Bạn không nên sử dụng mật khẩu Gmail thông thường. Thay vào đó, hãy tạo một "App password" cho tài khoản Gmail của mình. Hướng dẫn: Tạo và sử dụng Mật khẩu ứng dụng.</em></p>
+<strong>Chuẩn bị môi trường</strong>
 </p>
 
- <strong>6. Khởi tạo Cơ sở dữ liệu & Chạy server<strong><br>
-  <code>python app.py</code>
-  <p>Ứng dụng sẽ chạy tại <code>http://127.0.0.1:5000</code> (hoặc cổng đã cấu hình trong .env).</em></p>
-</p>
+<p><strong>1. Tạo môi trường ảo (Virtual Environment): </strong></p>
+<pre><code>python -m venv venv
+# Kích hoạt môi trường ảo:
+# Trên Windows: .\venv\Scripts\activate
+# Trên macOS/Linux: source venv/bin/activate</code></pre>
 
-### 🔑 Đăng nhập
+<p><strong>2. Cài đặt các Thư viện:</strong></p>
+<pre><code>pip install -r requirements.txt</code></pre>
+<p><em>(Nếu chưa có requirements.txt, bạn cần liệt kê các gói: Flask, Flask-Mail, pytesseract, opencv-python, unidecode, google-generativeai, v.v.)</em></p>
 
-- <strong><p>Khi khởi tạo DB lần đầu, bạn có thể cần tạo tài khoản admin thủ công trong <code>database.db</code> để bắt đầu. Hoặc sửa <code>schema.sql</code> để có một user mặc định.</p><strong>
 
-- <strong><p>Ví dụ tạo user admin trong <code>schema.sql</code> (chỉ dành cho phát triển) <code>schema.sql</code></p><strong>
+<p><strong>3. Cài đặt Tesseract OCR Engine: </strong></p>
+<p><strong>Windows:</strong> Tải xuống trình cài đặt từ Tesseract-OCR GitHub. **Đảm bảo thêm đường dẫn <code>tesseract.exe</code> vào biến môi trường <code>PATH</code>.**</p>
+<p><strong>Cài đặt ngôn ngữ tiếng Việt:</strong> Tìm file ngôn ngữ <code>vie.traineddata</code> và sao chép vào thư mục <code>tessdata</code> (thường là <code>C:\Program Files\Tesseract-OCR\tessdata</code>).</p>
 
+
+<p><strong>4. Cấu hình Biến Môi trường (.env)</strong></p>
+<p>Tạo file <code>.env</code> và điền các thông số:
+<pre><code>APP_SECRET_KEY="một_chuỗi_bí_mật_mạnh_cho_flask_session"
+GEMINI_API_KEY="YOUR_GOOGLE_GEMINI_API_KEY"
+MAIL_USERNAME='email_cua_ban@gmail.com'
+MAIL_PASSWORD='your_app_password' 
+MAIL_DEFAULT_SENDER='email_cua_ban@gmail.com'
+PORT=5000</code></pre>
+<p><em>Lưu ý về <code>MAIL_PASSWORD</code>: Bạn phải sử dụng **Mật khẩu ứng dụng** (App password) cho tài khoản Gmail của mình.</em></p>
+
+
+<p><strong>5. Khởi tạo Cơ sở dữ liệu & Chạy server</strong></p>
+<pre><code>python app.py</code></pre>
+<p><em>Ứng dụng sẽ chạy tại <code>http://127.0.0.1:5000</code> (hoặc cổng đã cấu hình trong .env).</em></p>
 
 <hr>
 
-<h2 align="center">🤝</h2>
+<h2 align="center">🤝 Đồng đội & Giấy phép</h2>
 <p>Dự án được phát triển bởi:</p>
 <center>
 <table>
-  <thead>
-    <tr>
-      <th>Giảng viên hướng dẫn</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ThS. Lê Trung Hiếu</td>
-    </tr>
-    <tr>
-      <td>KS. Nguyễn Thái Khánh</td>
-    </tr>
-  </tbody>
+  <thead>
+    <tr>
+      <th>Vai trò</th>
+      <th>Giảng viên/Tên</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Giảng viên hướng dẫn</td>
+      <td>ThS. Lê Trung Hiếu</td>
+    </tr>
+    <tr>
+      <td>Giảng viên hướng dẫn</td>
+      <td>KS. Nguyễn Thái Khánh</td>
+    </tr>
+    <tr>
+      <td>Ngô Tuấn Minh</td>
+      <td>1571020175</td>
+    </tr>
+    <tr>
+      <td>Nguyễn Trung Kiên</td>
+      <td>xxxxxxxx</td>
+    </tr>
+  </tbody>
 </table>
 </center>
-
-<center>
-<table>
-  <thead>
-    <tr>
-      <th>Họ và Tên</th>
-      <th>Mã sinh viên</th>
-      <th>Vai trò</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Ngô Tuấn Minh</td>
-      <td>1571020175</td>
-      <td>Phát triển dự án</td>
-    </tr>
-    <tr>
-      <td>Nguyễn Trung Kiên</td>
-      <td>xxxxxxxx</td>
-      <td>Phát triển dự án</td>
-    </tr>
-  </tbody>
-</table>
-</center>
-
-
-
-
-
-
 <p align="center">© 2025 NGÔ TUẤN MINH, CNTT16-06, TRƯỜNG ĐẠI HỌC ĐẠI NAM</p>
