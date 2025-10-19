@@ -79,3 +79,21 @@ Dashboard duyệt: Cho phép người duyệt xem và xử lý các đơn đang 
 Thống kê: Cung cấp các biểu đồ và số liệu tổng quan về tình hình đơn từ trong hệ thống.
 
 Giao diện thân thiện: Giao diện đơn giản, dễ sử dụng cho cả người nộp và người duyệt</p>
+
+### 💻 Công nghệ sử dụng
+
+<div align="center>
+
+[![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](#)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](#)
+[![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-for-the-badge&logo=sqlite&logoColor=white)](#)
+[![OpenCV](https://img.shields.io/badge/OpenCV-27338E?style=for-the-badge&logo=opencv&logoColor=white)](#)
+[![Tesseract OCR](https://img.shields.io/badge/Tesseract%20OCR-F38B00?style=for-the-badge)](#)
+[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](#)
+[![Flask-Mail](https://img.shields.io/badge/Flask--Mail-007ACC?style=for-the-badge)](#)
+[![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
+[![VS Code](https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#)
+
+</div>
