@@ -77,7 +77,7 @@ Chúng tôi giải quyết thách thức lớn nhất là xử lý **văn bản 
 
     <hr>
 
-    
+
 ### 💻 Công nghệ sử dụng
 
 <div align="center>
@@ -139,6 +139,12 @@ PORT=5000</code></pre>
 <p><em>Ứng dụng sẽ chạy tại <code>http://127.0.0.1:5000</code> (hoặc cổng đã cấu hình trong .env).</em></p>
 
 <hr>
+
+<h2 align="center">📸 Kết quả chương trình</h2>
+<div align="center">
+  <p><strong>Tổng quan chương trình</strong></p>
+  <img src="README/image1.png" alt="Ảnh Dashboard" width="100%">
+
 
 <h2 align="center">🤝 Đồng đội & Giấy phép</h2>
 <p>Dự án được phát triển bởi:</p>
