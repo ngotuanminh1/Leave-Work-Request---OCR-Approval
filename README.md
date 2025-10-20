@@ -14,9 +14,9 @@
 
 <hr>
 
-<h2 align="center">Hoạt động của hệ thống</h2>
+<h2 align="center">Sơ đồ luồng Hoạt động của hệ thống</h2>
 <div align="center">
-  <img src="README/sodoluong.jpg" alt="Kiến trúc hệ thống" width="100%">
+  <img src="README/sodoluong.png" alt="Sơ đồ luồng hệ thống" width="100%">
 </div>
 
 <hr>
