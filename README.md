@@ -149,8 +149,18 @@ PORT=5000</code></pre>
 <h2 align="center">📸 Kết quả chương trình</h2>
 <div align="center">
   <p><strong>Tổng quan chương trình</strong></p>
+  <p><strong>Dashboard Nhân viên</strong></p>
   <img src="README/img3.jpg" alt="Ảnh Dashboard nhân viên" width="100%">
+  <p><strong>Dashboard Quản lý</strong></p>
   <img src="README/img8.png" alt="Ảnh Dashboard Quản lý" width="100%">
+  <p><strong>Giao diện nộp đơn</strong></p>
+  <img src="README/img9.png" alt="Giao diện nộp đơn" width="100%">
+  <p><strong>Giao diện Quản lý duyệt</strong></p>
+  <img src="README/img8.png" alt="Giao diện quản lý duyệt" width="100%">
+  <p><strong>Giao diện thống kê</strong></p>
+  <img src="README/img6.png" alt="Giao diện thống kê" width="100%">
+  <p><strong>Quản lý nhân viên</strong></p>
+  <img src="README/img7.png" alt="Giao diện quản lý nhân viên" width="100%">
   
 
 
