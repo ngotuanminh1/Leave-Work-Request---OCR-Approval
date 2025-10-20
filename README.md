@@ -151,17 +151,33 @@ PORT=5000</code></pre>
   <p><strong>Tổng quan chương trình</strong></p>
   <p><strong>Dashboard Nhân viên</strong></p>
   <img src="README/img3.jpg" alt="Ảnh Dashboard nhân viên" width="100%">
+
+  <hr>
+
   <p><strong>Dashboard Quản lý</strong></p>
   <img src="README/img8.png" alt="Ảnh Dashboard Quản lý" width="100%">
+
+  <hr>
+
   <p><strong>Giao diện nộp đơn</strong></p>
   <img src="README/img9.png" alt="Giao diện nộp đơn" width="100%">
+  
+  <hr>
+
   <p><strong>Giao diện Quản lý duyệt</strong></p>
   <img src="README/img8.png" alt="Giao diện quản lý duyệt" width="100%">
+
+  <hr>
+
   <p><strong>Giao diện thống kê</strong></p>
   <img src="README/img6.png" alt="Giao diện thống kê" width="100%">
+
+  <hr>
+
   <p><strong>Quản lý nhân viên</strong></p>
   <img src="README/img7.png" alt="Giao diện quản lý nhân viên" width="100%">
   
+  <hr>
 
 
 <h2 align="center">🤝 Đồng đội & Giấy phép</h2>
