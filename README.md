@@ -180,7 +180,7 @@ PORT=5000</code></pre>
   <hr>
 
 
-<h2 align="center">🤝 Đồng đội & Giấy phép</h2>
+<h2 align="center">🤝</h2>
 <p>Dự án được phát triển bởi:</p>
 <center>
 <table>
@@ -200,12 +200,12 @@ PORT=5000</code></pre>
       <td>KS. Nguyễn Thái Khánh</td>
     </tr>
     <tr>
+      <td>Sinh viên thực hiện</td>
       <td>Ngô Tuấn Minh</td>
-      <td>1571020175</td>
     </tr>
     <tr>
+      <td>Sinh viên thực hiện</td>
       <td>Nguyễn Trung Kiên</td>
-      <td>xxxxxxxx</td>
     </tr>
   </tbody>
 </table>
