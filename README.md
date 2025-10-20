@@ -14,6 +14,13 @@
 
 <hr>
 
+<h2 align="center">Hoạt động của hệ thống</h2>
+<div align="center">
+  <img src="README/sodoluong.jpg" alt="Kiến trúc hệ thống" width="100%">
+</div>
+
+<hr>
+
 <h2 align="center">✨ Mô tả dự án</h2>
 <p align="justify">
 Dự án này là một giải pháp **E-Workflow (Luồng công việc điện tử)** tiên tiến nhằm số hóa và tự động hóa hoàn toàn quy trình xử lý đơn hành chính <strong>(Đơn xin nghỉ, công tác, thôi việc, thanh toán)</strong> trong môi trường doanh nghiệp.
@@ -42,7 +49,6 @@ Chúng tôi giải quyết thách thức lớn nhất là xử lý **văn bản 
 </pre>
 
 <hr>
-
 
 
 <h2 align="center">✨ Tính năng Chính</h2>
