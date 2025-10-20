@@ -149,8 +149,8 @@ PORT=5000</code></pre>
 <h2 align="center">📸 Kết quả chương trình</h2>
 <div align="center">
   <p><strong>Tổng quan chương trình</strong></p>
-  <img src="README/image3.jpg" alt="Ảnh Dashboard nhân viên" width="100%">
-  <img src="README/image8.png" alt="Ảnh Dashboard Quản lý" width="100%">
+  <img src="README/img3.jpg" alt="Ảnh Dashboard nhân viên" width="100%">
+  <img src="README/img8.png" alt="Ảnh Dashboard Quản lý" width="100%">
   
 
 
