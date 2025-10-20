@@ -14,19 +14,19 @@
 
 <hr>
 
-<h2 align="center">Sơ đồ luồng Hoạt động của hệ thống</h2>
-<div align="center">
-  <img src="README/sodoluong.png" alt="Sơ đồ luồng hệ thống" width="100%">
-</div>
-
-<hr>
-
 <h2 align="center">✨ Mô tả dự án</h2>
 <p align="justify">
 Dự án này là một giải pháp **E-Workflow (Luồng công việc điện tử)** tiên tiến nhằm số hóa và tự động hóa hoàn toàn quy trình xử lý đơn hành chính <strong>(Đơn xin nghỉ, công tác, thôi việc, thanh toán)</strong> trong môi trường doanh nghiệp.
 <br><br>
 Chúng tôi giải quyết thách thức lớn nhất là xử lý **văn bản tiếng Việt không chuẩn** từ ảnh (lỗi dấu, dính chữ) bằng phương pháp lai ghép (**Hybrid**) giữa OCR truyền thống **và Trí tuệ nhân tạo** tạo sinh (LLM).
 </p>
+
+<hr>
+
+<h2 align="center">Sơ đồ luồng Hoạt động của hệ thống</h2>
+<div align="center">
+  <img src="README/sodoluong.png" alt="Sơ đồ luồng hệ thống" width="100%">
+</div>
 
 <hr>
 
